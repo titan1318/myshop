@@ -9,6 +9,7 @@ from .models import Product, ContactInfo, BlogPost, Version
 from .forms import FeedbackForm, ProductForm, VersionForm
 from django.views import View
 from catalog.services import get_categories
+from django.core.cache import cache
 
 
 
@@ -30,12 +31,6 @@ class HomepageView(ListView):
         context['products_with_versions'] = products_with_versions
         context['query'] = self.request.GET.get("q", "")
         return context
-
-
-class ProductDetailView(DetailView):
-    model = Product
-    template_name = 'catalog/product_detail.html'
-    context_object_name = 'product'
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
@@ -196,9 +191,20 @@ class VersionDeleteView(DeleteView):
         messages.success(request, 'Версия успешно удалена!')
         return super().delete(request, *args, **kwargs)
 
-def product_detail(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    return render(request, 'product_detail.html', {'product': product})
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'catalog/product_detail.html'
+    context_object_name = 'product'
+
+    def get_object(self, queryset=None):
+        # Получаем объект из кэша, если он существует
+        product = cache.get(f'product_{self.kwargs["pk"]}')
+        if not product:
+            # Если в кэше объекта нет, загружаем из базы данных
+            product = super().get_object(queryset)
+            # Сохраняем объект в кэше на 15 минут
+            cache.set(f'product_{self.kwargs["pk"]}', product, 60 * 15)
+        return product
 
 class CategoryListView(ListView):
     template_name = 'catalog/category_list.html'

@@ -1,5 +1,4 @@
 from django.views.decorators.cache import cache_page
-from catalog.views import product_detail
 from django.urls import path
 from .views import ProductListView
 from .views import (
@@ -29,7 +28,5 @@ urlpatterns = [
     path('version/new/', VersionCreateView.as_view(), name='create_version'),
     path('version/<int:pk>/edit/', VersionUpdateView.as_view(), name='update_version'),
     path('version/<int:pk>/delete/', VersionDeleteView.as_view(), name='delete_version'),
-    path('product/<int:pk>/', cache_page(300)(product_detail), name='product_detail'),
-    path('product/<int:pk>/', cache_page(60 * 15)(product_detail), name='product_detail'),
     path('categories/', CategoryListView.as_view(), name='category_list'),
 ]
