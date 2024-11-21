@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ product.name }}</h1>
+<p>{{ product.description }}</p>
+<p>Цена: {{ product.price }}</p>
+
+{% if request.user == product.owner or perms.catalog.can_change_any_description %}
+    <a href="{% url 'catalog:update_product' product.pk %}">Редактировать</a>
+{% endif %}
+
+{% if request.user == product.owner or perms.catalog.can_change_any_category %}
+    <a href="{% url 'catalog:delete_product' product.pk %}">Удалить</a>
+{% endif %}
+
+{% if perms.catalog.can_unpublish_product %}
+    <form method="post" action="{% url 'catalog:unpublish_product' product.pk %}">
+        {% csrf_token %}
+        <button type="submit">Отменить публикацию</button>
+    </form>
+{% endif %}
+{% endblock %}

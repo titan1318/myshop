@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block title %}Мои права{% endblock %}
+
+{% block content %}
+<h1>Ваши права:</h1>
+<ul>
+    {% for perm in user_permissions %}
+        <li>{{ perm }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

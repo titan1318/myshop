@@ -1,0 +1,12 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Удалить версию{% endblock %}
+
+{% block content %}
+    <h2>Вы уверены, что хотите удалить эту версию?</h2>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Да, удалить</button>
+        <a href="{% url 'catalog:homepage' %}" class="btn btn-secondary">Отмена</a>
+    </form>
+{% endblock %}

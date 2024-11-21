@@ -1,0 +1,13 @@
+{% extends 'catalog/base.html' %}
+{% block title %}{% if blogpost %}Редактировать{% else %}Создать{% endif %} блоговую запись{% endblock %}
+{% load crispy_forms_tags %}
+{{ form|crispy }}
+
+{% block content %}
+    <h1>{% if blogpost %}Редактировать{% else %}Создать{% endif %} блоговую запись</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Сохранить</button>
+    </form>
+{% endblock %}

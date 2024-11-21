@@ -1,0 +1,36 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Электроника",
+      "description": "Гаджеты и устройства"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "Смартфон",
+      "description": "Современный смартфон с мощным процессором, высококачественной камерой и множеством функций для повседневного использования.",
+      "price": "29999.99",
+      "category": 1,
+      "available": true,
+      "created_at": "2024-11-01T10:00:00Z",
+      "updated_at": "2024-11-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "Планшет",
+      "description": "Мощный и компактный планшет, идеально подходящий для учебы и работы.",
+      "price": "18999.99",
+      "category": 1,
+      "available": true,
+      "created_at": "2024-11-01T10:00:00Z",
+      "updated_at": "2024-11-01T10:00:00Z"
+    }
+  }
+]

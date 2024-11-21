@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Ваши разрешения</h1>
+<ul>
+    {% for perm in user_permissions %}
+        <li>{{ perm }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
