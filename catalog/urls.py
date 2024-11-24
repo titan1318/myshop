@@ -12,6 +12,7 @@ from .views import (
 app_name = 'catalog'
 
 urlpatterns = [
+    path('product/<int:pk>/', cache_page(60 * 15)(ProductDetailView.as_view()), name='product_detail'),
     path('product/', ProductListView.as_view(), name='product_list'),
     path('', HomepageView.as_view(), name='homepage'),
     path('product/<int:pk>/', ProductDetailView.as_view(), name='product_detail'),

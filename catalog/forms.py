@@ -2,6 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from .models import Product, Version
 
+
 class StyledFormMixin:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -11,15 +12,18 @@ class StyledFormMixin:
             else:
                 field.widget.attrs['class'] = 'form-check-input'
 
+
 class VersionForm(StyledFormMixin, forms.ModelForm):
     class Meta:
         model = Version
         fields = ['product', 'version_number', 'version_name', 'is_current']
 
+
 class FeedbackForm(forms.Form, StyledFormMixin):
     name = forms.CharField(label='Ваше имя', max_length=100)
     email = forms.EmailField(label='Ваш Email')
     message = forms.CharField(label='Сообщение', widget=forms.Textarea)
+
 
 class ProductForm(forms.ModelForm):
     class Meta:

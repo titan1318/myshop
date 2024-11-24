@@ -2,10 +2,10 @@
 {% block title %}Удаление записи{% endblock %}
 
 {% block content %}
-    <h1>Удалить запись "{{ object.title }}"?</h1>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Да, удалить</button>
-        <a href="{% url 'catalog:blogpost_detail' object.pk %}">Отмена</a>
-    </form>
+<h1>Удалить запись "{{ object.title }}"?</h1>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Да, удалить</button>
+    <a href="{% url 'catalog:blogpost_detail' object.pk %}">Отмена</a>
+</form>
 {% endblock %}

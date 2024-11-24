@@ -8,6 +8,7 @@ from django.core.cache import cache
 
 User = get_user_model()
 
+
 class ProductPermissionsTests(TestCase):
     def setUp(self):
         self.client = Client()
@@ -72,6 +73,7 @@ class ProductPermissionsTests(TestCase):
         response = self.client.post(reverse('catalog:delete_product', args=[self.product.pk]))
         self.assertEqual(response.status_code, 302)
 
+
 class CategoryServiceTests(TestCase):
     def setUp(self):
         # Создаем тестовые данные
@@ -85,10 +87,6 @@ class CategoryServiceTests(TestCase):
         Category.objects.all().delete()
         cached_categories = get_categories()
         self.assertEqual(len(cached_categories), 2)
-
-
-
-
 
     def test_product_detail_view(self):
         response = self.client.get(reverse('catalog:product_detail', args=[self.product.pk]))

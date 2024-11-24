@@ -3,7 +3,6 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-
 class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
@@ -15,4 +14,3 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
-

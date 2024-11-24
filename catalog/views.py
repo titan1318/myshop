@@ -12,7 +12,6 @@ from catalog.services import get_categories
 from django.core.cache import cache
 
 
-
 class HomepageView(ListView):
     model = Product
     template_name = 'catalog/homepage.html'
@@ -191,6 +190,7 @@ class VersionDeleteView(DeleteView):
         messages.success(request, 'Версия успешно удалена!')
         return super().delete(request, *args, **kwargs)
 
+
 class ProductDetailView(DetailView):
     model = Product
     template_name = 'catalog/product_detail.html'
@@ -205,6 +205,7 @@ class ProductDetailView(DetailView):
             # Сохраняем объект в кэше на 15 минут
             cache.set(f'product_{self.kwargs["pk"]}', product, 60 * 15)
         return product
+
 
 class CategoryListView(ListView):
     template_name = 'catalog/category_list.html'

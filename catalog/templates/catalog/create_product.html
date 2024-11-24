@@ -3,10 +3,10 @@
 {% block title %}Создание продукта{% endblock %}
 
 {% block content %}
-    <h1>Создать новый продукт</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Создать продукт</button>
-    </form>
+<h1>Создать новый продукт</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Создать продукт</button>
+</form>
 {% endblock %}

@@ -42,6 +42,7 @@ class PasswordResetView(FormView):
 class UserLoginView(LoginView):
     template_name = 'users/login.html'
 
+
 def activate_account(request, uidb64, token):
     User = get_user_model()
     try:
@@ -55,7 +56,8 @@ def activate_account(request, uidb64, token):
         user.save()
         return redirect('users:login')
     else:
-        return render(request, 'users/activation_invalid.html', {'message': 'Ссылка активации недействительна или истек срок действия.'})
+        return render(request, 'users/activation_invalid.html',
+                      {'message': 'Ссылка активации недействительна или истек срок действия.'})
 
 
 class RegistrationView(FormView):
